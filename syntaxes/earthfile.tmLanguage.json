@@ -135,7 +135,7 @@
 							"name": "constant.numeric-port.earthfile"
 						}
 					},
-					"match": "^\\s*(EXPOSE)\\s(\\d+)"
+					"match": "^\\s*(EXPOSE)\\s*(\\d+)"
 				},
 				{
 					"captures": {
@@ -163,10 +163,6 @@
 					"match": "^\\s*\\b(FOR)\\b.*?\\b(IN)\\b"
 				},
 				{
-					"name": "keyword.other.special-method.earthfile",
-					"match": "^\\s*FROM DOCKERFILE\\s"
-				},
-				{
 					"captures": {
 						"1": {
 							"name": "keyword.other.special-method.earthfile"
@@ -175,7 +171,22 @@
 							"name": "entity.name.type.base-image.earthfile"
 						}
 					},
-					"match": "^\\s*(FROM)\\s+([^\\s#]+)"
+					"match": "^\\s*(FROM)\\s*([^\\s#]+)"
+				},
+				{
+					"captures": {
+						"1": {
+							"name": "keyword.other.special-method.earthfile"
+						},
+						"2": {
+							"name": "entity.name.type.tag.earthfile"
+						}
+					},
+					"match": "^\\s*(FROM|COPY|SAVE ARTIFACT|SAVE IMAGE|RUN|LABEL|EXPOSE|VOLUME|USER|ENV|ARG|BUILD|WORKDIR|ENTRYPOINT|CMD|GIT CLONE|DOCKER LOAD|DOCKER PULL|HEALTHCHECK|WITH DOCKER|END|IF|ELSE|ELSE IF|DO|COMMAND|IMPORT|LOCALLY|FOR|VERSION|WAIT|TRY|FINALLY|CACHE|HOST|PIPELINE|TRIGGER|PROJECT|SET|LET|ADD|STOP SIGNAL|ONBUILD|SHELL)\\s*((--\\w+(?:-\\w+)*\\s*)+)"
+				},
+				{
+					"name": "keyword.other.special-method.earthfile",
+					"match": "^\\s*FROM DOCKERFILE\\s"
 				},
 				{
 					"name": "keyword.other.special-method.earthfile",
@@ -183,7 +194,7 @@
 				},
 				{
 					"name": "keyword.other.special-method.earthfile",
-					"match": "^\\s*(FROM|COPY|SAVE ARTIFACT|SAVE IMAGE|RUN|LABEL|EXPOSE|VOLUME|USER|ENV|ARG|BUILD|WORKDIR|ENTRYPOINT|CMD|GIT CLONE|DOCKER LOAD|DOCKER PULL|HEALTHCHECK|WITH DOCKER|END|IF|ELSE|ELSE IF|DO|COMMAND|IMPORT|LOCALLY|FOR|VERSION|WAIT|TRY|FINALLY|CACHE|HOST|PIPELINE|TRIGGER|PROJECT)\\s"
+					"match": "^\\s*(FROM|COPY|SAVE ARTIFACT|SAVE IMAGE|RUN|LABEL|EXPOSE|VOLUME|USER|ENV|ARG|BUILD|WORKDIR|ENTRYPOINT|CMD|GIT CLONE|DOCKER LOAD|DOCKER PULL|HEALTHCHECK|WITH DOCKER|END|IF|ELSE|ELSE IF|DO|COMMAND|IMPORT|LOCALLY|FOR|VERSION|WAIT|TRY|FINALLY|CACHE|HOST|PIPELINE|TRIGGER|PROJECT|SET|LET|ADD|STOP SIGNAL|ONBUILD|SHELL)\\s"
 				}
 			]
 		},
