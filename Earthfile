@@ -5,7 +5,6 @@ FROM node:19.1.0-alpine3.15
 RUN npm install -g vsce ovsx semver
 WORKDIR /earthfile-syntax-highlighting
 
-
 # package builds the Earthfile Syntax Highlighting package locally as a vscode extension
 package:
     COPY . ./
