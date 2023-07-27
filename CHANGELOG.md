@@ -3,7 +3,7 @@
 ### 0.0.15
 
 * Add highlighting for `SET`, `LET`, `ADD`, `STOP`, `SIGNAL`, `ONBUILD`, `SHELL`
-* Add highlighting for command arguments `--required`
+* Add highlighting for command arguments such as `--required`
 * Update so that earthly/earthfile-grammar is the single source of truth
 
 ### 0.0.14

@@ -1,4 +1,6 @@
 VERSION 0.7
+PROJECT earthly-technologies/earthfile-grammar
+
 FROM node:19.1.0-alpine3.15
 RUN npm install -g vsce ovsx semver
 WORKDIR /earthfile-syntax-highlighting
@@ -24,13 +26,13 @@ local:
 release:
     ARG --required VSCODE_RELEASE_TAG
     COPY --build-arg VSCODE_RELEASE_TAG="$VSCODE_RELEASE_TAG" +package/earthfile-syntax-highlighting-$VSCODE_RELEASE_TAG.vsix ./
-    RUN --secret VSCE_TOKEN=+secrets/earthly-technologies/vsce/token test -n "$VSCE_TOKEN"
-    RUN --secret OVSX_TOKEN=+secrets/earthly-technologies/ovsx/token test -n "$OVSX_TOKEN"
+    RUN --secret VSCE_TOKEN=vsce-token test -n "$VSCE_TOKEN"
+    RUN --secret OVSX_TOKEN=ovsx-token test -n "$OVSX_TOKEN"
     RUN --push \
-        --secret VSCE_TOKEN=+secrets/earthly-technologies/vsce/token \
+        --secret VSCE_TOKEN=vsce-token \
         vsce publish --pat "$VSCE_TOKEN" --packagePath ./earthfile-syntax-highlighting-$VSCODE_RELEASE_TAG.vsix
-    RUN --push\
-        --secret OVSX_TOKEN=+secrets/earthly-technologies/ovsx/token \ 
+    RUN --push \
+        --secret OVSX_TOKEN=ovsx-token \ 
         npx ovsx publish ./earthfile-syntax-highlighting-$VSCODE_RELEASE_TAG.vsix -p "$OVSX_TOKEN"
 
 export:
