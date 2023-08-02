@@ -72,6 +72,10 @@
 				{
 					"match": "\\\\$",
 					"name": "constant.character.escape.earthfile"
+				},
+				{
+					"match": "(?<=EXPOSE\\s)(\\d+)",
+					"name": "constant.numeric.earthfile"
 				}
 			]
 		},
@@ -132,17 +136,6 @@
 							"name": "keyword.other.special-method.earthfile"
 						},
 						"2": {
-							"name": "constant.numeric-port.earthfile"
-						}
-					},
-					"match": "^\\s*(EXPOSE)\\s*(\\d+)"
-				},
-				{
-					"captures": {
-						"1": {
-							"name": "keyword.other.special-method.earthfile"
-						},
-						"2": {
 							"name": "entity.name.variable.target.earthfile"
 						},
 						"3": {
@@ -182,15 +175,15 @@
 							"name": "entity.name.type.tag.earthfile"
 						}
 					},
-					"match": "^\\s*(FROM|COPY|SAVE ARTIFACT|SAVE IMAGE|RUN|LABEL|EXPOSE|VOLUME|USER|ENV|ARG|BUILD|WORKDIR|ENTRYPOINT|CMD|GIT CLONE|DOCKER LOAD|DOCKER PULL|HEALTHCHECK|WITH DOCKER|END|IF|ELSE|ELSE IF|DO|COMMAND|IMPORT|LOCALLY|FOR|VERSION|WAIT|TRY|FINALLY|CACHE|HOST|PIPELINE|TRIGGER|PROJECT|SET|LET|ADD|STOP SIGNAL|ONBUILD|SHELL)\\s*((--\\w+(?:-\\w+)*\\s*)+)"
-				},
-				{
-					"name": "keyword.other.special-method.earthfile",
-					"match": "^\\s*FROM DOCKERFILE\\s"
+					"match": "^\\s*(FROM|COPY|SAVE ARTIFACT|SAVE IMAGE|RUN|LABEL|EXPOSE|VOLUME|USER|ENV|ARG|BUILD|WORKDIR|ENTRYPOINT|CMD|GIT CLONE|DOCKER LOAD|DOCKER PULL|HEALTHCHECK|WITH DOCKER|END|IF|ELSE|ELSE IF|DO|COMMAND|IMPORT|LOCALLY|FOR|VERSION|WAIT|TRY|FINALLY|CACHE|HOST|PIPELINE|TRIGGER|PROJECT|SET|LET|ADD|STOP SIGNAL|ONBUILD|SHELL)\\s((--\\w+(?:-\\w+)*\\s*)+)"
 				},
 				{
 					"name": "keyword.other.special-method.earthfile",
 					"match": "^\\s*HEALTHCHECK\\s+(NONE|CMD)\\s"
+				},
+				{
+					"name": "keyword.other.special-method.earthfile",
+					"match": "^\\s*FROM DOCKERFILE\\s"
 				},
 				{
 					"name": "keyword.other.special-method.earthfile",
@@ -251,6 +244,10 @@
 					"name": "variable.other.earthfile"
 				},
 				{
+					"match": "(?<=\\${)([a-zA-Z0-9.\\-_]+)(?=})",
+					"name": "variable.other.earthfile"
+				},
+				{
 					"captures": {
 						"1": {
 							"name": "punctuation.definition.variable.begin.earthfile"
@@ -262,7 +259,7 @@
 							"name": "punctuation.definition.variable.end.earthfile"
 						}
 					},
-					"match": "(\\${)([a-zA-Z0-9.\\-_]+)(})"
+					"match": "(\\${)([a-zA-Z0-9.\\-_#]+)(})"
 				}
 			]
 		},
