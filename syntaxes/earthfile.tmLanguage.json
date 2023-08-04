@@ -1,6 +1,9 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "Earthfile",
+	"fileTypes": [
+		"Earthfile"
+	],
 	"patterns": [
 		{
 			"include": "#comment"
@@ -88,7 +91,7 @@
 				},
 				{
 					"name": "keyword.operator.flag.earthfile",
-					"match": "(\\B(-)+[a-zA-Z0-9\\-]+)"
+					"match": "(\\B(-)+[a-zA-Z0-9\\-_]+)"
 				},
 				{
 					"include": "#special-method"
@@ -161,7 +164,18 @@
 							"name": "entity.name.type.base-image.earthfile"
 						}
 					},
-					"match": "(?<=(^FROM\\s))(\\S+)"
+					"match": "^\\s*(FROM)\\s*([^\\s#]+)"
+				},
+				{
+					"captures": {
+						"1": {
+							"name": "keyword.other.special-method.earthfile"
+						},
+						"2": {
+							"name": "entity.name.type.tag.earthfile"
+						}
+					},
+					"match": "^\\s*(FROM|COPY|SAVE ARTIFACT|SAVE IMAGE|RUN|LABEL|EXPOSE|VOLUME|USER|ENV|ARG|BUILD|WORKDIR|ENTRYPOINT|CMD|GIT CLONE|DOCKER LOAD|DOCKER PULL|HEALTHCHECK|WITH DOCKER|END|IF|ELSE|ELSE IF|DO|COMMAND|IMPORT|LOCALLY|FOR|VERSION|WAIT|TRY|FINALLY|CACHE|HOST|PIPELINE|TRIGGER|PROJECT|SET|LET|ADD|STOP SIGNAL|ONBUILD|SHELL)\\s((--\\w+(?:-\\w+)*\\s*)+)"
 				},
 				{
 					"name": "keyword.other.special-method.earthfile",
@@ -173,7 +187,7 @@
 				},
 				{
 					"name": "keyword.other.special-method.earthfile",
-					"match": "^\\s*(FROM|COPY|SAVE ARTIFACT|SAVE IMAGE|RUN|LABEL|EXPOSE|VOLUME|USER|ENV|ARG|BUILD|WORKDIR|ENTRYPOINT|CMD|GIT CLONE|DOCKER LOAD|DOCKER PULL|HEALTHCHECK|WITH DOCKER|END|IF|ELSE|ELSE IF|DO|COMMAND|IMPORT|LOCALLY|FOR|VERSION)\\s"
+					"match": "^\\s*(FROM|COPY|SAVE ARTIFACT|SAVE IMAGE|RUN|LABEL|EXPOSE|VOLUME|USER|ENV|ARG|BUILD|WORKDIR|ENTRYPOINT|CMD|GIT CLONE|DOCKER LOAD|DOCKER PULL|HEALTHCHECK|WITH DOCKER|END|IF|ELSE|ELSE IF|DO|COMMAND|IMPORT|LOCALLY|FOR|VERSION|WAIT|TRY|FINALLY|CACHE|HOST|PIPELINE|TRIGGER|PROJECT|SET|LET|ADD|STOP SIGNAL|ONBUILD|SHELL)\\s"
 				}
 			]
 		},
@@ -193,10 +207,12 @@
 						}
 					},
 					"name": "string.quoted.double.earthfile",
-					"patterns": [{
-						"match": "\\\\.",
-						"name": "constant.character.escaped.earthfile"
-					}]
+					"patterns": [
+						{
+							"match": "\\\\.",
+							"name": "constant.character.escaped.earthfile"
+						}
+					]
 				},
 				{
 					"begin": "'",
@@ -212,17 +228,19 @@
 						}
 					},
 					"name": "string.quoted.single.earthfile",
-					"patterns": [{
-						"match": "\\\\.",
-						"name": "constant.character.escaped.earthfile"
-					}]
+					"patterns": [
+						{
+							"match": "\\\\.",
+							"name": "constant.character.escaped.earthfile"
+						}
+					]
 				}
 			]
 		},
 		"variable": {
 			"patterns": [
 				{
-					"match": "\\$[a-zA-Z0-9_\\-]+",
+					"match": "\\$[a-zA-Z0-9_]+",
 					"name": "variable.other.earthfile"
 				},
 				{
@@ -230,20 +248,18 @@
 					"name": "variable.other.earthfile"
 				},
 				{
-					"begin": "\\$\\{",
-					"end": "\\}",
-					"beginCaptures": {
+					"captures": {
 						"1": {
 							"name": "punctuation.definition.variable.begin.earthfile"
-						}
-					},
-					"endCaptures": {
-						"1": {
+						},
+						"2": {
+							"name": "variable.other.earthfile"
+						},
+						"3": {
 							"name": "punctuation.definition.variable.end.earthfile"
 						}
 					},
-					"name": "variable.other.earthfile",
-					"patterns": []
+					"match": "(\\${)([a-zA-Z0-9.\\-_#]+)(})"
 				}
 			]
 		},
