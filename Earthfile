@@ -1,8 +1,8 @@
-VERSION 0.7
+VERSION --pass-args 0.7
 PROJECT earthly-technologies/earthfile-grammar
 
-FROM node:19.1.0-alpine3.15
-RUN npm install -g vsce ovsx semver
+FROM node:20.10.0-alpine3.18
+RUN npm install -g @vscode/vsce ovsx semver
 WORKDIR /earthfile-syntax-highlighting
 
 # package builds the Earthfile Syntax Highlighting package locally as a vscode extension
@@ -16,16 +16,26 @@ package:
         mv ./earthfile-syntax-highlighting-$VERSION.vsix ./earthfile-syntax-highlighting-$VSCODE_RELEASE_TAG.vsix
     SAVE ARTIFACT ./earthfile-syntax-highlighting-$VSCODE_RELEASE_TAG.vsix
 
+# local creates a new package in the local filesystem
 local:
     ARG --required VSCODE_RELEASE_TAG
-    FROM --build-arg VSCODE_RELEASE_TAG="$VSCODE_RELEASE_TAG" +package
+    FROM --pass-args +package
     SAVE ARTIFACT ./earthfile-syntax-highlighting-$VSCODE_RELEASE_TAG.vsix AS LOCAL ./earthfile-syntax-highlighting-$VSCODE_RELEASE_TAG.vsix
+
+# local-install produces an extension in the local filesystem and installs it with code cli
+local-install:
+    LOCALLY
+    ARG --required VSCODE_RELEASE_TAG
+    WAIT
+        BUILD --pass-args +local
+    END
+    RUN code --install-extension earthfile-syntax-highlighting-$VSCODE_RELEASE_TAG.vsix
 
 # release publishes the Earthfile Syntax Highlighting package as a vscode extension
 # directly to the VS Code Marketplace and Open Vsx
 release:
     ARG --required VSCODE_RELEASE_TAG
-    COPY --build-arg VSCODE_RELEASE_TAG="$VSCODE_RELEASE_TAG" +package/earthfile-syntax-highlighting-$VSCODE_RELEASE_TAG.vsix ./
+    COPY --pass-args +package/earthfile-syntax-highlighting-$VSCODE_RELEASE_TAG.vsix ./
     RUN --secret VSCE_TOKEN=vsce-token test -n "$VSCE_TOKEN"
     RUN --secret OVSX_TOKEN=ovsx-token test -n "$OVSX_TOKEN"
     RUN --push \

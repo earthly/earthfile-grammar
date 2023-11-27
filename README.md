@@ -9,10 +9,8 @@ For an introduction of Earthly see the [Earthly GitHub repository](https://githu
 ## How to Test
 
 ```
-# Build the package
-earthly --build-arg VSCODE_RELEASE_TAG=${VERSION} +package
-
-# Left click on the package and select `Install Extension VSIX`
+# Build & Install the package
+earthly +local-install --VSCODE_RELEASE_TAG=${VERSION}
 ```
 
 ## Release Notes

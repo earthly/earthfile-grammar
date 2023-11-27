@@ -1,5 +1,10 @@
 # Change Log
 
+### 0.0.16
+
+* Add highlighting for `FUNCTION`
+* Fix highlighting for `ELSE IF`
+
 ### 0.0.15
 
 * Add highlighting for `SET`, `LET`, `ADD`, `STOP`, `SIGNAL`, `ONBUILD`, `SHELL`
