@@ -27,7 +27,7 @@
 			"include": "#target"
 		},
 		{
-			"include": "#user-command"
+			"include": "#function"
 		}
 	],
 	"scopeName": "source.earthfile",
@@ -100,7 +100,7 @@
 					"include": "#target"
 				},
 				{
-					"include": "#user-command"
+					"include": "#function"
 				}
 			]
 		},
@@ -116,12 +116,12 @@
 				}
 			]
 		},
-		"user-command": {
+		"function": {
 			"patterns": [
 				{
 					"captures": {
 						"1": {
-							"name": "entity.name.function.user-command.earthfile"
+							"name": "entity.name.function.function.earthfile"
 						}
 					},
 					"match": "^\\s*([A-Z][a-zA-Z0-9._]*):"
@@ -175,7 +175,7 @@
 							"name": "entity.name.type.tag.earthfile"
 						}
 					},
-					"match": "^\\s*(FROM|COPY|SAVE ARTIFACT|SAVE IMAGE|RUN|LABEL|EXPOSE|VOLUME|USER|ENV|ARG|BUILD|WORKDIR|ENTRYPOINT|CMD|GIT CLONE|DOCKER LOAD|DOCKER PULL|HEALTHCHECK|WITH DOCKER|END|IF|ELSE|ELSE IF|DO|COMMAND|IMPORT|LOCALLY|FOR|VERSION|WAIT|TRY|FINALLY|CACHE|HOST|PIPELINE|TRIGGER|PROJECT|SET|LET|ADD|STOP SIGNAL|ONBUILD|SHELL)\\s((--\\w+(?:-\\w+)*\\s*)+)"
+					"match": "^\\s*(FROM|COPY|SAVE ARTIFACT|SAVE IMAGE|RUN|LABEL|EXPOSE|VOLUME|USER|ENV|ARG|BUILD|WORKDIR|ENTRYPOINT|CMD|GIT CLONE|DOCKER LOAD|DOCKER PULL|HEALTHCHECK|WITH DOCKER|END|IF|ELSE|ELSE IF|DO|COMMAND|FUNCTION|IMPORT|LOCALLY|FOR|VERSION|WAIT|TRY|FINALLY|CACHE|HOST|PIPELINE|TRIGGER|PROJECT|SET|LET|ADD|STOP SIGNAL|ONBUILD|SHELL)\\s((--\\w+(?:-\\w+)*\\s*)+)"
 				},
 				{
 					"name": "keyword.other.special-method.earthfile",
@@ -187,7 +187,7 @@
 				},
 				{
 					"name": "keyword.other.special-method.earthfile",
-					"match": "^\\s*(FROM|COPY|SAVE ARTIFACT|SAVE IMAGE|RUN|LABEL|EXPOSE|VOLUME|USER|ENV|ARG|BUILD|WORKDIR|ENTRYPOINT|CMD|GIT CLONE|DOCKER LOAD|DOCKER PULL|HEALTHCHECK|WITH DOCKER|END|IF|ELSE|ELSE IF|DO|COMMAND|IMPORT|LOCALLY|FOR|VERSION|WAIT|TRY|FINALLY|CACHE|HOST|PIPELINE|TRIGGER|PROJECT|SET|LET|ADD|STOP SIGNAL|ONBUILD|SHELL)\\s"
+					"match": "^\\s*(FROM|COPY|SAVE ARTIFACT|SAVE IMAGE|RUN|LABEL|EXPOSE|VOLUME|USER|ENV|ARG|BUILD|WORKDIR|ENTRYPOINT|CMD|GIT CLONE|DOCKER LOAD|DOCKER PULL|HEALTHCHECK|WITH DOCKER|END|IF|ELSE|ELSE IF|DO|COMMAND|FUNCTION|IMPORT|LOCALLY|FOR|VERSION|WAIT|TRY|FINALLY|CACHE|HOST|PIPELINE|TRIGGER|PROJECT|SET|LET|ADD|STOP SIGNAL|ONBUILD|SHELL)\\s"
 				}
 			]
 		},
@@ -275,7 +275,7 @@
 				},
 				{
 					"match": "([a-zA-Z0-9._\\-/:]*\\+[A-Z][a-zA-Z0-9._]*)",
-					"name": "entity.name.function.user-command.earthfile"
+					"name": "entity.name.function.function.earthfile"
 				}
 			]
 		}
