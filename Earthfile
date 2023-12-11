@@ -45,6 +45,11 @@ release:
         --secret OVSX_TOKEN=ovsx-token \ 
         npx ovsx publish ./earthfile-syntax-highlighting-$VSCODE_RELEASE_TAG.vsix -p "$OVSX_TOKEN"
 
+    # Create a new GH release:
+    RUN apk add github-cli
+    COPY CHANGELOG.md .
+    RUN --push --secret GH_TOKEN=littleredcorvette-github-token gh release create --latest $VSCODE_RELEASE_TAG -n "$(sed -n $(echo $(grep -n "###" CHANGELOG.md| awk 'NR<=2'|cut -f1 -d:)|sed -e 's/ /,/g')p CHANGELOG.md|grep \*)" --repo earthly/earthfile-grammar
+
 export:
     COPY . ./
     SAVE ARTIFACT ./
