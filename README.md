@@ -15,7 +15,7 @@ earthly +local-install --VSCODE_RELEASE_TAG=${VERSION}
 
 ## How to Release
 
-1. Check what the next version should be by looking [what is already published]((https://marketplace.visualstudio.com/items?itemName=earthly.earthfile-syntax-highlighting))
+1. Check what the next version should be by looking [what is already published](https://marketplace.visualstudio.com/items?itemName=earthly.earthfile-syntax-highlighting)
 2. Set the version to publish:
     ```bash
     export VSCODE_RELEASE_TAG=${NEW_VERSION_HERE}
@@ -23,12 +23,7 @@ earthly +local-install --VSCODE_RELEASE_TAG=${VERSION}
 3. Make sure that the new version has release notes already in the [README](https://github.com/earthly/earthfile-grammar/CHANGELOG.md)
 4. Run:
     ```bash
-    earthly --release --VSCODE_RELEASE_TAG=${VSCODE_RELEASE_TAG}
-    ```
-5. Finally, tag git for future reference
-    ```bash
-    git tag "vscode-syntax-highlighting-$VSCODE_RELEASE_TAG"
-    git push origin "vscode-syntax-highlighting-$VSCODE_RELEASE_TAG"
+    earthly +release --VSCODE_RELEASE_TAG=${VSCODE_RELEASE_TAG}
     ```
 
 ### troubleshooting
